@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------------
-# svcrun.sh - Start/Stop Script for the WorksConnect Service Adapter Container
+# svcrun.sh - Start/Stop Script for the platform Service Adapter Container
 #
 # Environment Variable Prequisites
 #
@@ -10,7 +10,7 @@
 #
 #Created: svcctrl.sh,v 1.0 2016/06/27 20:01:21 chinds
 # -----------------------------------------------------------------------------
-echo "====== WorksConnect Service Adapter startting up....====="
+
 
 # UnComment this to set tha java home from the ENV VAR JAVA_HOME or from some explicit location Setup
 #if [ "x$JAVA_HOME" = "x" ]; then
@@ -42,7 +42,6 @@ JAVA_DEBUG_OPTIONS="-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,address=6210
 
 #SET THE CLASSPATH
 CLASSPATH=".:${SERVICE_HOME}/bin"
-CLASSPATH="${CLASSPATH}:${SERVICE_LIB}/worksconnect.jar"
 CLASSPATH="${CLASSPATH}:${SERVICE_LIB}/activation.jar"
 CLASSPATH="${CLASSPATH}:${SERVICE_LIB}/aspectj-1.6.9.jar"
 CLASSPATH="${CLASSPATH}:${SERVICE_LIB}/aspectjrt.jar"
@@ -106,10 +105,7 @@ CLASSPATH="${CLASSPATH}:${SERVICE_LIB}/xstream-1.3.1.jar"
 echo "=====Service Class Path BEGIN ================"
 echo "${CLASSPATH}"
 echo "=====Service Class Path END ================"
-SPRING_SERVICE_CONFIG="-Dspring.config.loc=file:${SERVICE_HOME}/config/notification_service_config.xml"
-#SPRING_SERVICE_CONFIG="-Dspring.config.loc=notification_service_config.xml"
 LOGGING_CONFIG="-Dlog.config.loc=${SERVICE_HOME}/config/logconfig.xml"
-SERVICE_PROPERTIES_CONFIG="-Dservice_properties.loc=${SERVICE_HOME}/config/notification_service_properties.xml"
 SERVICE_BOOTSTRAP_CLASS="com.bowne.service.services.ServiceBootstrap"
 ARGS=""
 STDOUT_LOG="${SERVICE_HOME}/logs/errors.log"
