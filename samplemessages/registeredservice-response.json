@@ -1,0 +1,27 @@
+{
+  "errormsg":"",
+  "services": [
+      {
+        "servicename":"XXXXServiceName",
+        "servicegroup":"SSSSServiceClunsterA",
+        "hostname": "xxx.xxx.xxx.xxx",
+        "port": "6144",
+        "type": "queued-ibmmq",
+        "params": {
+          "queuename":"testQueue",
+          "queuemanager":"testQueueManager"
+          "channelname":"testChannel",
+        }
+      },
+    {
+      "servicename": "BBBBBServiceName",
+      "servicegroup":"SSSSServiceClunsterB",
+      "hostname": "xxx.xxx.xxx.xxx",
+      "port": "53004",
+      "type": "http-rest",
+      "params": {
+      }
+    }
+ ]
+
+}

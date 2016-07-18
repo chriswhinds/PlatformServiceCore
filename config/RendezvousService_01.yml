@@ -1,0 +1,31 @@
+---
+service name: RendezvousService
+instance id: 01
+version: 1.0
+
+
+service properties: # Service Properties
+  - active service registry cache : /registry
+  - service class namme: com.droit.service.configservice.RendezvousService
+    # Service bootstrap Mode Utility for ConfigurationService and RendevzousService only - For all others Service Config fetched from Service Config
+    - bootstrap mode: utility # allowed values "peer" or "utility"
+service end points:
+  # Low level platform end points
+  platform end points:
+   - end point :  # Command and Control interface
+         name: cmdctrl
+         protocol: http-rest
+         host: 192.0.0.1
+         port: 53005
+         parms:
+  # End points that this service provides
+  service provider end points:
+  - end point :   # Platform Configuration Repository interface
+        name: rendezvous
+        protocol: http-rest
+        host: 192.0.0.1
+        port: 53003
+        parms:
+  # End points required by this service implementation
+  service required end points:
+...

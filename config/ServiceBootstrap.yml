@@ -1,0 +1,34 @@
+---
+service name:
+instance id:
+version: 1.0
+service properties: # Utility Service Properties
+  - repository location: /repository
+  - platform service class namme: com.droit.service.configservice.ConfigurationService
+  # Service bootstrap Mode
+  #  Current Platform Service List:
+  #  ConfigurationService
+  #  RendevzousService
+  # For Peer Microservices the service's config defintions is retievied by botstrap from the Configuration Service at runtime.
+  - bootstrap mode: platform # allowed values "peer" or "platform"
+platform end points:
+   - end point :  # Command and Control interface
+         name: cmdctrl
+         protocol: http-rest
+         host: 192.0.0.1
+         port: 53002
+   - end point :  # Required Services Location Registry
+         name: rendezvous
+         protocol: http-rest
+         host: 192.0.0.1
+         port: 53003
+   - end point :  # Required Services Location Registry
+         name: configsvc
+         protocol: http-rest
+         host: 192.0.0.1
+         port: 53004
+# End points that this service profides
+service provider end points:
+# End points required by this service implementation ( Optional )
+service required end points:
+...

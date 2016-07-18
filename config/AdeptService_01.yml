@@ -1,0 +1,57 @@
+---
+service name: AdeptService
+instance id: 01
+version: 1.0
+service properties: # all of the Adept Service properties go here
+  # Service bootstrap Mode Utility for ConfigurationService and Rendevzous only - For all others Service Config fetched from Service Config using service_bootstrap.yml passed in -Dservice-bootstrap=service_bootstrap.yml
+  - bootstrap mode: peer # allowed values "peer" or "utility"
+  - service class namme: com.droit.services.adeptservice.AdeptService
+
+  - database.connection pool: #h2 Database connection Properties ( MarketLogic )
+    n2.dblocation : h2db/data.mv.db
+    h2.driverclass : org.h2.Driver
+    h2.urlPrefix : jdbc:h2:file:$$$;ACCESS_MODE_DATA=r
+    h2.initialPoolSize : 2
+    h2.acquireIncrement : 2
+    h2.checkoutTimeout : 30
+    h2.maxPoolSize : 50
+    h2.minPoolSize : 5
+    h2.maxIdleTimeExcessConnections : 600
+    h2.preferredTestQuery :  SELECT 1;
+    h2.testConnectionOnCheckin : true
+    h2.idleConnectionTestPeriod : 900
+
+  - hibernate : #Hibernate Entity Manager
+    packageToScan       : com.droitfintech.dao
+    persistenceUnitName : TDSS
+    jpaDialect          : org.springframework.orm.jpa.vendor.HibernateJpaDialect
+    - jpaVendorAdapter  :
+        showSql           : false
+        generateDdl       : false
+        databasePlatform  : org.hibernate.dialect.H2Dialect
+    - jpajpaProperties  :
+        hibernateDialect  : org.hibernate.dialect.H2Dialect
+
+  - workflow.repositor:  # Workflow repository location , NOTE will switch to Datomic at some point in the near future
+     droit.repository.location: /repositoryLocation/droit
+     client.repository.location: /repositoryLocation/client
+
+
+service end points:
+  # Low level platform end points
+  platform end points:
+   - end point :  # Command and Control interface
+         name: cmdctrl
+         protocol: http-rest
+         host: 192.0.0.1
+         port: 53002
+  # End points that this service profides
+  service provider end points:
+  - end point :   # Platform Configuration Repository interface
+        name: adeptsvc
+        protocol: http-rest
+        host: 192.0.0.1
+        port: 53005
+  # End points required by this service implementation
+  service required end points:
+...

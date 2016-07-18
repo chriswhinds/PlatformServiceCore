@@ -1,0 +1,32 @@
+---
+service name: ConfigurationService
+instance id: 01
+version: 1.0
+service properties: # Service Properties
+  - repository location: /repository
+  - service class namme: com.droit.service.configservice.ConfigurationService
+  # Service bootstrap Mode Utility for ConfigurationService and Rendevzous only - For all others Service Config fetched from Service Config using service_bootstrap.yml passed in -Dservice-bootstrap=service_bootstrap.yml
+  - bootstrap mode: utility # allowed values "peer" or "utility"
+service end points:
+  # Low level platform end points
+  platform end points:
+   - end point :  # Command and Control interface
+         name: cmdctrl
+         protocol: http-rest
+         host: 192.0.0.1
+         port: 53002
+   - end point :  # Required Services Location Registry
+         name: rendezvous
+         protocol: http-rest
+         host: 192.0.0.1
+         port: 53003
+  # End points that this service profides
+  service provider end points:
+  - end point :   # Platform Configuration Repository interface
+        name: confsvc
+        protocol: http-rest
+        host: 192.0.0.1
+        port: 53001
+  # End points required by this service implementation
+  service required end points:
+...
